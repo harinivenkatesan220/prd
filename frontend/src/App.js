@@ -21,11 +21,12 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
- 
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+
   useEffect(() => {
     const loadCountryRules = async () => {
       try {
-        const res = await fetch('http://localhost:5000/analyze/countries');
+        const res = await fetch(`${apiBaseUrl}/analyze/countries`);
         const rules = await res.json();
         setCountryRules(rules);
       } catch (err) {
@@ -33,7 +34,7 @@ function App() {
       }
     };
     loadCountryRules();
-  }, []);
+  }, [apiBaseUrl]);
 
   const appStyles = {
     minHeight: '100vh',
@@ -85,7 +86,7 @@ function App() {
     formData.append('file', file);
 
     try {
-      const res = await fetch('http://localhost:5000/upload', { method: 'POST', body: formData });
+      const res = await fetch(`${apiBaseUrl}/upload`, { method: 'POST', body: formData });
       if (!res.ok) {
         setLoading(false);
         setError(strings.uploadFailed);
@@ -108,7 +109,7 @@ function App() {
     if (!uploadId) return;
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/analyze', {
+      const res = await fetch(`${apiBaseUrl}/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ uploadId, email, emailOptIn, country }),
@@ -225,7 +226,7 @@ function App() {
           </script>
         </body>
         </html>
-      `;
+        `;
 
       const newWindow = window.open('', '_blank');
       newWindow.document.write(demoHtml);
