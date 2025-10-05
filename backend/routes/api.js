@@ -10,11 +10,9 @@ const supabase = require('../supabaseClient');
 
 const router = express.Router();
 
-
 const upload = multer({
   limits: { fileSize: (process.env.MAX_UPLOAD_SIZE_MB || 5) * 1024 * 1024 }
 });
-
 
 function parseData(raw) {
   if (raw.trim().startsWith('{') || raw.trim().startsWith('[')) {
@@ -22,7 +20,6 @@ function parseData(raw) {
   }
   return parse(raw, { columns: true, skip_empty_lines: true });
 }
-
 
 router.post('/upload', upload.single('file'), (req, res) => {
   let rawData;
@@ -48,7 +45,6 @@ router.post('/upload', upload.single('file'), (req, res) => {
   );
 });
 
-
 router.post('/analyze', (req, res) => {
   const { uploadId, questionnaire } = req.body;
   if (!uploadId) return res.status(400).json({ error: 'uploadId required' });
@@ -64,7 +60,6 @@ router.post('/analyze', (req, res) => {
       return res.status(400).json({ error: 'Parse error: ' + e.message });
     }
 
-   
     const analyze = require('./analyze'); 
     let report;
     try {
@@ -72,7 +67,6 @@ router.post('/analyze', (req, res) => {
     } catch (e) {
       return res.status(400).json({ error: e.message });
     }
-
 
     db.run(
       'INSERT INTO reports(id, upload_id, created_at, report_json) VALUES(?,?,?,?)',
@@ -84,7 +78,6 @@ router.post('/analyze', (req, res) => {
     );
   });
 });
-
 
 router.get('/report/:reportId', (req, res) => {
   const { reportId } = req.params;
@@ -98,7 +91,6 @@ router.get('/report/:reportId', (req, res) => {
     }
   );
 });
-
 
 router.get('/reports', (req, res) => {
   const limit = parseInt(req.query.limit || '10', 10);
