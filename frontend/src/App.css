@@ -1,0 +1,181 @@
+
+[data-theme="light"] {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #212529;
+}
+[data-theme="dark"] {
+  --bs-body-bg: #1a1a1a;
+  --bs-body-color: #ffffff;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bs-body-bg) !important;
+  color: var(--bs-body-color) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background: linear-gradient(-45deg, #1e3c72, #2a5298, #f5af19, #ff7e5f);
+  background-size: 400% 400%;
+  animation: gradientBG 16s ease infinite;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+@keyframes gradientBG {
+  0%, 100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+
+
+.bg-gradient-custom {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  position: relative;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+}
+.bg-gradient-custom::before,
+.bg-gradient-custom::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-gradient-custom::before {
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.2), transparent 70%);
+}
+.bg-gradient-custom::after {
+  background: radial-gradient(circle at bottom right, rgba(255,255,255,0.15), transparent 70%);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 2.5rem 3rem;
+  max-width: 700px;
+  width: 100%;
+  margin: 4rem auto;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease;
+  position: relative;
+  z-index: 10;
+}
+.glass-panel:hover {
+  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.45);
+}
+
+
+.btn, .btn-custom {
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 0.9em 2.5em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  display: inline-block;
+}
+.btn {
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  color: white;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.5);
+}
+.btn:hover, .btn:focus {
+  background: linear-gradient(90deg, #5a72d7, #663899);
+  transform: scale(1.1);
+  outline: none;
+}
+.btn-custom {
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 0.8rem 2.2rem;
+}
+.btn-custom:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.65);
+}
+
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  color: #2a5298;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+h2, h3, h4 {
+  font-family: 'Montserrat', sans-serif;
+  color: #344b59;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+
+.file-input,
+.form-control {
+  cursor: pointer;
+  padding: 0.75rem 0.5rem;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+.matched-badge,
+.missing-badge {
+  font-size: 0.9rem;
+  padding: 0.25em 0.75em;
+  border-radius: 12px;
+  margin: 3px 6px;
+  display: inline-block;
+  font-weight: 600;
+  user-select: none;
+}
+.matched-badge { background: #4caf50; color: white; }
+.missing-badge { background: #e53935; color: white; }
+
+
+.rule-pass { color: green; font-weight: normal; padding-bottom: 6px; }
+.rule-fail { color: red;   font-weight: bold;  padding-bottom: 6px; }
+
+
+pre {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.875rem;
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  user-select: text;
+}
+
+
+@media (max-width: 600px) {
+  .glass-panel {
+    padding: 1.5rem 1.5rem;
+    margin: 2rem;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  .btn {
+    width: 100%;
+    padding: 0.8em;
+  }
+}
